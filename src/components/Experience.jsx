@@ -1,5 +1,16 @@
 const experiences = [
   {
+    company: 'Jember Mini Zoo',
+    period: 'Mei 2025 – Sekarang',
+    roles: [
+      'IT Staff: Bertanggung jawab dalam pemeliharaan infrastruktur jaringan dan sistem informasi zoo.',
+      'Software Developer: Mengembangkan dan mengelola aplikasi internal untuk efisiensi operasional.',
+      'Sistem Manajemen: Implementasi solusi digital untuk manajemen pengunjung dan inventaris.',
+    ],
+    color: '#FF006E',
+    icon: '🦁',
+  },
+  {
     company: 'Badan Riset dan Inovasi Nasional (BRIN)',
     period: 'Agustus 2024 – Desember 2024',
     roles: [
