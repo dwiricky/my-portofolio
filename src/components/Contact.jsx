@@ -1,146 +1,87 @@
 import { useState } from 'react';
 
 export default function Contact() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
-
-  const handleChange = (e) => setForm({ ...form, [e.target.name]: e.target.value });
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    setSent(true);
-    setTimeout(() => setSent(false), 4000);
-    setForm({ name: '', email: '', message: '' });
-  };
-
   const socials = [
-    { label: 'GitHub', href: 'https://github.com/dwiricky', icon: '⌥' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/ricky-dwi-setyawan', icon: 'in' },
-    { label: 'WhatsApp', href: 'https://wa.me/628998034007', icon: '📞' },
-    { label: 'Email', href: 'mailto:dwiricky47@gmail.com', icon: '@' },
+    { label: 'GitHub', href: 'https://github.com/dwiricky', icon: '⌥', color: '#333' },
+    { label: 'LinkedIn', href: 'https://linkedin.com/in/ricky-dwi-setyawan', icon: 'in', color: '#0077B5' },
+    { label: 'WhatsApp', href: 'https://wa.me/628998034007', icon: '📞', color: '#25D366' },
+    { label: 'Email', href: 'mailto:dwiricky47@gmail.com', icon: '@', color: 'var(--accent)' },
   ];
 
-  const inputStyle = {
-    width: '100%',
-    background: 'var(--bg-card)',
-    border: '1px solid var(--border)',
-    borderRadius: '0.75rem',
-    padding: '0.75rem 1rem',
-    color: 'var(--text)',
-    fontSize: '0.875rem',
-    outline: 'none',
-    transition: 'border-color 0.2s',
-  };
-
   return (
-    <section id="contact" className="py-24 px-6 max-w-6xl mx-auto">
+    <section id="contact" className="py-24 px-6 max-w-4xl mx-auto">
       {/* Section Header */}
-      <div className="flex items-center gap-4 mb-16">
-        <span className="font-mono text-sm font-semibold" style={{ color: 'var(--accent)' }}>05.</span>
-        <h2 className="text-3xl md:text-5xl font-bold t-text">Get In Touch</h2>
-        <div className="flex-1 h-px ml-4" style={{ backgroundColor: 'var(--border)' }} />
+      <div className="flex flex-col items-center gap-4 mb-16 text-center">
+        <span className="font-mono text-sm font-semibold" style={{ color: 'var(--accent)' }}>05. What's Next?</span>
+        <h2 className="text-4xl md:text-6xl font-bold t-text">Get In Touch</h2>
+        <div className="w-24 h-1 mt-2 rounded-full" style={{ backgroundColor: 'var(--accent)' }} />
       </div>
 
-      <div className="grid md:grid-cols-2 gap-16">
-        {/* Left: Info */}
-        <div>
-          <p className="text-lg leading-relaxed mb-10 t-muted">
-            Punya proyek yang ingin dikerjakan, pertanyaan, atau sekadar ingin menyapa —
-            inbox saya selalu terbuka. Saya akan membalas dalam <strong className="t-text">24 jam</strong>.
-            Atau hubungi langsung via{' '}
-            <span className="font-semibold" style={{ color: 'var(--accent)' }}>dwiricky47@gmail.com</span>.
-          </p>
+      <div className="text-center max-w-2xl mx-auto">
+        <p className="text-xl md:text-2xl leading-relaxed mb-12 t-muted">
+          Punya proyek yang ingin dikerjakan, pertanyaan, atau sekadar ingin menyapa? 
+          Saya selalu terbuka untuk diskusi baru dan peluang menarik. 
+          Hubungi saya langsung melalui salah satu platform di bawah ini:
+        </p>
 
-          {/* Social Links */}
-          <div className="grid grid-cols-2 gap-3">
-            {socials.map(({ label, href, icon }) => (
-              <a
-                key={label}
-                href={href}
-                target="_blank"
-                rel="noreferrer"
-                className="flex items-center gap-3 rounded-xl px-4 py-3 transition-all duration-200"
-                style={{ border: '1px solid var(--border)', backgroundColor: 'var(--bg-card)' }}
-                onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; }}
-              >
+        {/* Big Contact Buttons */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-16">
+          {socials.map(({ label, href, icon, color }) => (
+            <a
+              key={label}
+              href={href}
+              target="_blank"
+              rel="noreferrer"
+              className="group flex items-center justify-between rounded-2xl px-6 py-5 transition-all duration-300 hover:-translate-y-1"
+              style={{ 
+                border: '1px solid var(--border)', 
+                backgroundColor: 'var(--bg-card)',
+              }}
+              onMouseEnter={(e) => { 
+                e.currentTarget.style.borderColor = color;
+                e.currentTarget.style.boxShadow = `0 10px 30px ${color}15`;
+              }}
+              onMouseLeave={(e) => { 
+                e.currentTarget.style.borderColor = 'var(--border)';
+                e.currentTarget.style.boxShadow = 'none';
+              }}
+            >
+              <div className="flex items-center gap-4">
                 <span
-                  className="w-8 h-8 rounded-full flex items-center justify-center font-mono text-sm font-bold transition-all duration-200"
-                  style={{ background: 'var(--accent)20', border: '1px solid var(--accent)30', color: 'var(--accent)' }}
+                  className="w-12 h-12 rounded-xl flex items-center justify-center font-mono text-xl font-bold transition-all duration-300"
+                  style={{ background: `${color}15`, border: `1px solid ${color}30`, color: color }}
                 >
                   {icon}
                 </span>
-                <span className="text-sm font-semibold t-muted">{label}</span>
-              </a>
-            ))}
-          </div>
+                <div className="text-left">
+                  <span className="block text-xs font-mono t-dim uppercase tracking-widest">{label}</span>
+                  <span className="block text-lg font-bold t-text group-hover:opacity-90">{label === 'Email' ? 'Kirim Pesan' : 'Hubungi Saya'}</span>
+                </div>
+              </div>
+              <span className="text-xl opacity-0 group-hover:opacity-100 transition-all duration-300" style={{ color: color }}>→</span>
+            </a>
+          ))}
         </div>
 
-        {/* Right: Form */}
-        <form onSubmit={handleSubmit} className="space-y-4">
-          {sent && (
-            <div
-              className="rounded-xl px-4 py-3 text-sm font-mono font-semibold animate-pop-in"
-              style={{ background: 'var(--accent)10', border: '1px solid var(--accent)', color: 'var(--accent)' }}
-            >
-              ✓ Pesan terkirim! Saya akan segera membalas.
-            </div>
-          )}
-
-          {[
-            { label: 'Nama', name: 'name', type: 'text', placeholder: 'Nama Anda' },
-            { label: 'Email', name: 'email', type: 'email', placeholder: 'email@contoh.com' },
-          ].map(({ label, name, type, placeholder }) => (
-            <div key={name}>
-              <label className="block text-xs font-mono t-dim mb-2 uppercase tracking-widest">{label}</label>
-              <input
-                type={type}
-                name={name}
-                value={form[name]}
-                onChange={handleChange}
-                required
-                placeholder={placeholder}
-                style={inputStyle}
-                onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
-                onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
-              />
-            </div>
-          ))}
-
-          <div>
-            <label className="block text-xs font-mono t-dim mb-2 uppercase tracking-widest">Pesan</label>
-            <textarea
-              name="message"
-              value={form.message}
-              onChange={handleChange}
-              required
-              rows={5}
-              placeholder="Ada yang ingin Anda sampaikan?"
-              style={{ ...inputStyle, resize: 'none' }}
-              onFocus={(e) => e.target.style.borderColor = 'var(--accent)'}
-              onBlur={(e) => e.target.style.borderColor = 'var(--border)'}
-            />
-          </div>
-
-          <button
-            type="submit"
-            className="w-full text-white font-bold py-4 rounded-xl text-sm active:scale-95 transition-all duration-200"
-            style={{ backgroundColor: 'var(--accent)' }}
-            onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-h)'}
-            onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--accent)'}
+        {/* Main Email Highlight */}
+        <div className="inline-block relative">
+          <a 
+            href="mailto:dwiricky47@gmail.com"
+            className="text-2xl md:text-4xl font-bold transition-colors hover:text-[var(--accent)] t-text"
           >
-            Kirim Pesan →
-          </button>
-        </form>
+            dwiricky47@gmail.com
+          </a>
+          <div className="h-0.5 w-full mt-1 bg-current opacity-20" />
+        </div>
       </div>
 
       {/* Footer */}
-      <div className="mt-24 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--border)' }}>
+      <div className="mt-32 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--border)' }}>
         <p className="font-mono text-xs t-dim">
-          © 2025 Ricky Dwi Setyawan — Built with React + Tailwind
+          © 2026 Ricky Dwi Setyawan — Built with React + Tailwind
         </p>
         <p className="font-mono text-xs t-dim">
-          Made with <span style={{ color: 'var(--accent)' }}>♥</span> & lots of coffee
+          Dibuat dengan <span style={{ color: 'var(--accent)' }}>♥</span> & Semangat
         </p>
       </div>
     </section>

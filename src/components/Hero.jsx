@@ -91,7 +91,7 @@ export default function Hero() {
             <span className="t-text font-semibold">Fullstack Web Development</span>,{' '}
             <span className="font-semibold" style={{ color: 'var(--accent)' }}>Artificial Intelligence</span>, dan{' '}
             <span className="t-text font-semibold">Analisis Data</span>.
-            Mahasiswa Teknik Informatika Politeknik Negeri Jember.
+            Lulusan Teknik Informatika Politeknik Negeri Jember.
           </p>
 
           {/* CTA Buttons */}
