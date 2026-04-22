@@ -3,7 +3,7 @@ import { useState } from 'react';
 export default function Contact() {
   const socials = [
     { label: 'GitHub', href: 'https://github.com/dwiricky', icon: '⌥', color: '#333' },
-    { label: 'LinkedIn', href: 'https://linkedin.com/in/ricky-dwi-setyawan', icon: 'in', color: '#0077B5' },
+    { label: 'LinkedIn', href: 'https://www.linkedin.com/in/ricky-dwi-setyawan-1aaa11276/', icon: 'in', color: '#0077B5' },
     { label: 'WhatsApp', href: 'https://wa.me/628998034007', icon: '📞', color: '#25D366' },
     { label: 'Email', href: 'mailto:dwiricky47@gmail.com', icon: '@', color: 'var(--accent)' },
   ];

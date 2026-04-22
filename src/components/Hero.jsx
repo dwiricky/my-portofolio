@@ -65,7 +65,7 @@ export default function Hero() {
             style={{ backgroundColor: 'var(--accent)' }}
           >
             <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
-            Available for work
+            Available for project
           </div>
         </div>
 
