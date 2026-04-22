@@ -19,7 +19,7 @@ const projects = [
     description: 'Sistem otomatisasi gerbang masuk menggunakan sensor dan mikrokontroler. Terintegrasi dengan database untuk validasi akses.',
     tags: ['Arduino Uno', 'C++', 'IoT', 'Hardware'],
     color: '#00D4FF',
-    image: '/projects/gate.png',
+    image: null,
     live: '#',
     github: '#',
   },
