@@ -15,7 +15,7 @@ export default function App() {
         <div className="fixed inset-0 pointer-events-none grid-bg opacity-[0.4]" />
 
         <Navbar />
-        <main>
+        <main className="relative z-10">
           <Hero />
           <Experience />
           <Skills />
