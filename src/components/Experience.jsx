@@ -8,7 +8,7 @@ const experiences = [
       'Sistem Manajemen: Implementasi solusi digital untuk manajemen pengunjung dan inventaris.',
     ],
     color: '#FF006E',
-    icon: '🦁',
+    logo: '/projects/jemberminizoo.webp',
   },
   {
     company: 'Badan Riset dan Inovasi Nasional (BRIN)',
@@ -20,7 +20,7 @@ const experiences = [
       'Data Scientist: Menerapkan machine learning untuk wawasan dari data besar.',
     ],
     color: '#00D4FF',
-    icon: '🏛️',
+    logo: '/projects/brin.png',
   },
   {
     company: 'Gamelab.ID (MSIB Bootcamp)',
@@ -31,7 +31,7 @@ const experiences = [
       'Pengembangan Fitur: Membuat fitur yang meningkatkan interaksi pengguna.',
     ],
     color: '#7B2FBE',
-    icon: '🎮',
+    logo: '/projects/gamelabid.png',
   },
   {
     company: 'Roda Jaya',
@@ -42,7 +42,7 @@ const experiences = [
       'Pengembangan Fitur: Membuat fitur fungsional yang bermanfaat bagi pengguna.',
     ],
     color: '#3A86FF',
-    icon: '🏢',
+    logo: '/projects/rodajayalogo.png',
   },
   {
     company: 'Freelance',
@@ -54,7 +54,7 @@ const experiences = [
       'Data Scientist: Menerapkan machine learning dan statistik untuk prediksi.',
     ],
     color: '#00D4FF',
-    icon: '💼',
+    logo: '/projects/github.png', // Using github logo for freelance/projects
   },
 ];
 
@@ -88,7 +88,9 @@ export default function Experience() {
               >
                 <div className="flex flex-wrap items-center justify-between gap-2 mb-4">
                   <div className="flex items-center gap-3">
-                    <span className="text-2xl">{exp.icon}</span>
+                    <div className="w-10 h-10 rounded-lg overflow-hidden bg-white/10 flex items-center justify-center p-1 border" style={{ borderColor: 'var(--border)' }}>
+                      <img src={exp.logo} alt={exp.company} className="w-full h-full object-contain" />
+                    </div>
                     <h3 className="text-lg font-bold t-text">{exp.company}</h3>
                   </div>
                   <span

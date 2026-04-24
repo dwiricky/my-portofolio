@@ -1,12 +1,53 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 const roles = ['Fullstack Developer', 'Backend Web Developer', 'AI Engineer', 'Data Scientist', 'Machine Learning Engineer'];
+
+const stats = [
+  { num: 4, suffix: '+', label: 'Tahun Pengalaman' },
+  { num: 10, suffix: '+', label: 'Proyek Selesai' },
+  { num: 3, suffix: '', label: 'Instansi Kerja' },
+];
+
+function useCountUp(target, duration = 1500, start = false) {
+  const [count, setCount] = useState(0);
+  useEffect(() => {
+    if (!start) return;
+    let startTime = null;
+    const step = (timestamp) => {
+      if (!startTime) startTime = timestamp;
+      const progress = Math.min((timestamp - startTime) / duration, 1);
+      setCount(Math.floor(progress * target));
+      if (progress < 1) requestAnimationFrame(step);
+    };
+    requestAnimationFrame(step);
+  }, [start, target, duration]);
+  return count;
+}
+
+function StatCard({ target, suffix, label, animate }) {
+  const count = useCountUp(target, 1200, animate);
+  return (
+    <div
+      className="rounded-2xl p-4 text-center transition-all duration-300"
+      style={{ border: '1px solid var(--border)', backgroundColor: 'var(--bg-card)' }}
+      onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.transform = 'translateY(-2px)'; }}
+      onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.transform = 'translateY(0)'; }}
+    >
+      <p className="text-2xl md:text-3xl font-bold font-mono" style={{ color: 'var(--accent)' }}>
+        {animate ? count : 0}{suffix}
+      </p>
+      <p className="text-xs mt-1 font-mono t-dim leading-tight">{label}</p>
+    </div>
+  );
+}
 
 export default function Hero() {
   const [roleIdx, setRoleIdx] = useState(0);
   const [displayed, setDisplayed] = useState('');
   const [charIdx, setCharIdx] = useState(0);
   const [deleting, setDeleting] = useState(false);
+  const [statsVisible, setStatsVisible] = useState(false);
+  const statsRef = useRef(null);
 
   useEffect(() => {
     const current = roles[roleIdx];
@@ -26,6 +67,15 @@ export default function Hero() {
     return () => clearTimeout(timeout);
   }, [charIdx, deleting, roleIdx]);
 
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => { if (entry.isIntersecting) setStatsVisible(true); },
+      { threshold: 0.3 }
+    );
+    if (statsRef.current) observer.observe(statsRef.current);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <section id="about" className="min-h-screen flex flex-col justify-center px-6 pt-24 pb-12 max-w-6xl mx-auto">
       <div className="flex flex-col md:flex-row items-center md:items-start gap-12 md:gap-16">
@@ -43,7 +93,7 @@ export default function Hero() {
           >
             {/* Replace /profile.png with your real photo */}
             <img
-              src="/profile.jpg"
+              src="/profile.jpeg"
               alt="Ricky Dwi Setyawan"
               className="w-full h-full object-cover"
               onError={(e) => {
@@ -96,45 +146,59 @@ export default function Hero() {
 
           {/* CTA Buttons */}
           <div className="flex flex-wrap gap-4 mb-10 justify-center md:justify-start">
-            <a
-              href="#projects"
-              onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}
-              className="text-white font-bold px-8 py-4 rounded-full text-base active:scale-95 transition-all duration-200"
-              style={{ backgroundColor: 'var(--accent)' }}
-              onMouseEnter={(e) => e.currentTarget.style.backgroundColor = 'var(--accent-h)'}
-              onMouseLeave={(e) => e.currentTarget.style.backgroundColor = 'var(--accent)'}
-            >
-              See My Work →
-            </a>
+            {/* Hire Me - Prominent Button */}
             <a
               href="#contact"
               onClick={(e) => { e.preventDefault(); document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }); }}
+              className="relative group overflow-hidden text-white font-bold px-8 py-4 rounded-full text-base active:scale-95 transition-all duration-300 shadow-lg flex items-center gap-2"
+              style={{
+                background: 'linear-gradient(135deg, var(--accent), #7B2FBE)',
+                boxShadow: '0 0 24px rgba(247,37,133,0.45), 0 4px 15px rgba(0,0,0,0.3)',
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 40px rgba(247,37,133,0.7), 0 8px 25px rgba(0,0,0,0.4)';
+                e.currentTarget.style.transform = 'translateY(-2px) scale(1.03)';
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.boxShadow = '0 0 24px rgba(247,37,133,0.45), 0 4px 15px rgba(0,0,0,0.3)';
+                e.currentTarget.style.transform = 'translateY(0) scale(1)';
+              }}
+            >
+              {/* Shimmer effect */}
+              <span
+                className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"
+                style={{
+                  background: 'linear-gradient(105deg, transparent 20%, rgba(255,255,255,0.15) 50%, transparent 80%)',
+                  transform: 'skewX(-15deg)',
+                }}
+              />
+              <span className="relative flex items-center gap-2">
+                <span
+                  className="w-2 h-2 rounded-full bg-white"
+                  style={{ animation: 'pulse 1.5s infinite' }}
+                />
+                Hire Me
+                <span className="text-lg">✦</span>
+              </span>
+            </a>
+
+            {/* See My Work */}
+            <a
+              href="#projects"
+              onClick={(e) => { e.preventDefault(); document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }); }}
               className="font-bold px-8 py-4 rounded-full text-base active:scale-95 transition-all duration-200 t-text"
               style={{ border: '2px solid var(--border)' }}
-              onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--border-h)'}
-              onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = 'var(--accent)'; e.currentTarget.style.color = 'var(--accent)'; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = 'var(--border)'; e.currentTarget.style.color = ''; }}
             >
-              Get In Touch
+              See My Work →
             </a>
           </div>
 
-          {/* Stats */}
-          <div className="grid grid-cols-3 gap-4 max-w-sm mx-auto md:mx-0">
-            {[
-              { num: '4+', label: 'Years Exp.' },
-              { num: '6+', label: 'Projects' },
-              { num: '3.81', label: 'IPK / GPA' },
-            ].map(({ num, label }) => (
-              <div
-                key={label}
-                className="rounded-2xl p-4 text-center transition-colors t-bg-card"
-                style={{ border: '1px solid var(--border)' }}
-                onMouseEnter={(e) => e.currentTarget.style.borderColor = 'var(--accent)'}
-                onMouseLeave={(e) => e.currentTarget.style.borderColor = 'var(--border)'}
-              >
-                <p className="text-2xl md:text-3xl font-bold" style={{ color: 'var(--accent)' }}>{num}</p>
-                <p className="text-xs mt-1 font-mono t-dim">{label}</p>
-              </div>
+          {/* Stats with animated counter */}
+          <div ref={statsRef} className="grid grid-cols-3 gap-4 max-w-sm mx-auto md:mx-0">
+            {stats.map(({ num, suffix, label }) => (
+              <StatCard key={label} target={num} suffix={suffix} label={label} animate={statsVisible} />
             ))}
           </div>
         </div>
