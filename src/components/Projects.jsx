@@ -2,6 +2,28 @@ import { useState } from 'react';
 
 const projects = [
   {
+    id: 11,
+    title: 'Jember Mini Zoo',
+    year: '2024',
+    description: 'Website resmi Jember Mini Zoo. Platform informasi wisata edukasi yang menyajikan berbagai informasi terkait satwa, wahana, paket kegiatan, dan pemesanan tiket.',
+    tags: ['Web', 'Company Profile', 'Tourism'],
+    color: '#E87D00', // Orange matching the theme in the image
+    image: '/projects/jemberminizoo.png',
+    live: 'https://jemberminizoo.com',
+    github: '#',
+  },
+  {
+    id: 12,
+    title: 'Career Jember Mini Zoo',
+    year: '2024',
+    description: 'Portal karir resmi Jember Mini Zoo. Memfasilitasi proses rekrutmen pegawai dengan informasi lowongan kerja, magang, dan informasi seputar karir di Jember Mini Zoo.',
+    tags: ['Web', 'Career', 'Portal'],
+    color: '#E3C16F', // Yellowish matching the theme
+    image: '/projects/careerjmz.png',
+    live: 'https://career.jemberminizoo.com',
+    github: '#',
+  },
+  {
     id: 7,
     title: 'Sistem Penjualan Tiket Online',
     year: '2026',
@@ -86,7 +108,7 @@ const projects = [
     tags: ['Fullstack', 'Web', 'UI/UX', 'Marketing'],
     color: '#00D4FF',
     image: '/projects/rodajaya.png',
-    live: '#',
+    live: 'https://rodajayajember.com',
     github: '#',
   },
   {
