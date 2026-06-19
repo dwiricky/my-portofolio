@@ -4,7 +4,7 @@ const projects = [
   {
     id: 11,
     title: 'Jember Mini Zoo',
-    year: '2024',
+    year: '2025 - Sekarang',
     description: 'Website resmi Jember Mini Zoo. Platform informasi wisata edukasi yang menyajikan berbagai informasi terkait satwa, wahana, paket kegiatan, dan pemesanan tiket.',
     tags: ['Web', 'Company Profile', 'Tourism'],
     color: '#E87D00', // Orange matching the theme in the image
@@ -15,7 +15,7 @@ const projects = [
   {
     id: 12,
     title: 'Career Jember Mini Zoo',
-    year: '2024',
+    year: '2025 - Sekarang',
     description: 'Portal karir resmi Jember Mini Zoo. Memfasilitasi proses rekrutmen pegawai dengan informasi lowongan kerja, magang, dan informasi seputar karir di Jember Mini Zoo.',
     tags: ['Web', 'Career', 'Portal'],
     color: '#E3C16F', // Yellowish matching the theme
@@ -103,7 +103,7 @@ const projects = [
   {
     id: 4,
     title: 'Website Roda Jaya',
-    year: '2023',
+    year: '2023 & 2026',
     description: 'Platform marketing Roda Jaya yang memperkenalkan produk dan layanan perusahaan serta memfasilitasi interaksi pelanggan dengan berbagai fitur yang bermanfaat.',
     tags: ['Fullstack', 'Web', 'UI/UX', 'Marketing'],
     color: '#00D4FF',
