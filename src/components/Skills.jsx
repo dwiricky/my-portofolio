@@ -1,50 +1,52 @@
+import SkillIcon from './SkillIcons';
+
 const skills = [
   {
     name: 'Backend Web Development',
     level: 'Expert',
-    icon: '⚙️',
+    icon: 'server',
     color: '#00D4FF',
     desc: 'Merancang dan mengembangkan bagian belakang aplikasi web, termasuk pengelolaan server, API, dan database.',
   },
   {
     name: 'Backend Mobile Development',
     level: 'Advanced',
-    icon: '📱',
+    icon: 'smartphone',
     color: '#7B2FBE',
     desc: 'Mengembangkan bagian backend aplikasi mobile, termasuk pengelolaan server dan database yang mendukung aplikasi mobile.',
   },
   {
     name: 'Artificial Intelligence Engineering',
     level: 'Advanced',
-    icon: '🤖',
+    icon: 'cpu',
     color: '#3A86FF',
     desc: 'Merancang dan mengembangkan solusi berbasis kecerdasan buatan, termasuk pembuatan algoritma dan implementasi AI untuk sistem prediktif.',
   },
   {
     name: 'Data Analysis',
     level: 'Expert',
-    icon: '📊',
+    icon: 'barchart',
     color: '#00D4FF',
     desc: 'Menganalisis dan menafsirkan data untuk mendapatkan wawasan yang dapat digunakan untuk pengambilan keputusan berbasis data.',
   },
   {
     name: 'Data Engineering',
     level: 'Advanced',
-    icon: '🛠️',
+    icon: 'database',
     color: '#7B2FBE',
     desc: 'Merancang dan membangun infrastruktur data dan pipeline untuk pengolahan dan pemrosesan data besar.',
   },
   {
     name: 'Machine Learning Engineering',
     level: 'Advanced',
-    icon: '🧠',
+    icon: 'network',
     color: '#3A86FF',
     desc: 'Mengembangkan dan mengimplementasikan algoritma machine learning untuk membuat model yang dapat belajar dari data dan membuat prediksi.',
   },
   {
     name: 'Data Science',
     level: 'Advanced',
-    icon: '🔬',
+    icon: 'flask',
     color: '#00D4FF',
     desc: 'Menggunakan analisis data dan machine learning untuk menggali wawasan dari data yang kompleks dan besar, serta mengembangkan model untuk mendukung keputusan bisnis atau penelitian.',
   },
@@ -87,10 +89,10 @@ export default function Skills() {
             <div className="flex items-center justify-between mb-3">
               <div className="flex items-center gap-3">
                 <span
-                  className="w-9 h-9 rounded-lg flex items-center justify-center text-lg flex-shrink-0"
-                  style={{ background: `${color}15`, border: `1px solid ${color}30` }}
+                  className="w-9 h-9 rounded-lg flex items-center justify-center flex-shrink-0"
+                  style={{ background: `${color}15`, border: `1px solid ${color}30`, color }}
                 >
-                  {icon}
+                  <SkillIcon name={icon} className="w-5 h-5" />
                 </span>
                 <span className="font-bold text-sm t-text group-hover:opacity-90 transition-colors leading-tight">
                   {name}

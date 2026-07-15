@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 const projects = [
   {
     id: 11,
@@ -135,109 +133,106 @@ const projects = [
   },
 ];
 
-export default function Projects() {
-  const [hovered, setHovered] = useState(null);
+const isReal = (url) => url && url !== '#';
 
+function Placeholder({ color }) {
+  return (
+    <div
+      className="w-full h-full flex items-center justify-center"
+      style={{ background: `linear-gradient(135deg, ${color}12, transparent 70%)` }}
+    >
+      <svg viewBox="0 0 24 24" fill="none" stroke={color} strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="w-9 h-9 opacity-50" aria-hidden="true">
+        <polyline points="16 18 22 12 16 6" />
+        <polyline points="8 6 2 12 8 18" />
+      </svg>
+    </div>
+  );
+}
+
+export default function Projects() {
   return (
     <section id="projects" className="py-24 px-6 max-w-6xl mx-auto">
       {/* Section Header */}
-      <div className="flex items-center gap-4 mb-16">
+      <div className="flex items-center gap-4 mb-14">
         <span className="font-mono text-sm font-semibold" style={{ color: 'var(--accent)' }}>04.</span>
         <h2 className="text-3xl md:text-5xl font-bold t-text">Karya & Proyek</h2>
         <div className="flex-1 h-px ml-4" style={{ backgroundColor: 'var(--border)' }} />
       </div>
 
       {/* Project Grid */}
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
         {projects.map((project) => (
           <article
             key={project.id}
-            className="group relative rounded-2xl overflow-hidden transition-all duration-300 cursor-pointer"
-            style={{
-              border: `1px solid ${hovered === project.id ? project.color : 'var(--border)'}`,
-              backgroundColor: 'var(--bg-card)',
-            }}
-            onMouseEnter={() => setHovered(project.id)}
-            onMouseLeave={() => setHovered(null)}
+            className="group flex flex-col rounded-2xl overflow-hidden transition-all duration-300"
+            style={{ border: '1px solid var(--border)', backgroundColor: 'var(--bg-card)' }}
+            onMouseEnter={(e) => (e.currentTarget.style.borderColor = project.color)}
+            onMouseLeave={(e) => (e.currentTarget.style.borderColor = 'var(--border)')}
           >
-            {/* Color accent bar */}
-            <div
-              className="absolute top-0 left-0 h-1 w-0 group-hover:w-full transition-all duration-500 z-10"
-              style={{ backgroundColor: project.color }}
-            />
-
-            {/* Project Image */}
-            {project.image ? (
-              <div className="relative h-44 overflow-hidden">
+            {/* Media */}
+            <div className="relative aspect-[16/10] overflow-hidden">
+              {project.image ? (
                 <img
                   src={project.image}
                   alt={project.title}
+                  loading="lazy"
                   className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
                 />
-                {/* Overlay */}
-                <div
-                  className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center gap-3"
-                  style={{ background: `${project.color}20`, backdropFilter: 'blur(2px)' }}
-                >
-                  <a
-                    href={project.github}
-                    className="w-10 h-10 rounded-full border flex items-center justify-center text-xs font-bold text-white transition-all hover:scale-110"
-                    style={{ backgroundColor: 'rgba(0,0,0,0.7)', borderColor: 'rgba(255,255,255,0.3)' }}
-                    title="GitHub"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    GH
-                  </a>
-                  <a
-                    href={project.live}
-                    className="w-10 h-10 rounded-full border flex items-center justify-center text-xs font-bold transition-all hover:scale-110"
-                    style={{ backgroundColor: project.color, borderColor: project.color, color: 'white' }}
-                    title="Live Demo"
-                    onClick={(e) => e.stopPropagation()}
-                  >
-                    ↗
-                  </a>
-                </div>
-              </div>
-            ) : (
-              /* Placeholder for projects without image */
-              <div
-                className="h-24 flex items-center justify-center text-4xl opacity-30"
-                style={{ background: `linear-gradient(135deg, ${project.color}10, transparent)` }}
-              >
-                {project.id === 3 ? '📊' : '🌐'}
-              </div>
-            )}
+              ) : (
+                <Placeholder color={project.color} />
+              )}
+              <div className="absolute inset-0 pointer-events-none" style={{ background: 'linear-gradient(to top, rgba(0,0,0,0.28), transparent 55%)' }} />
+            </div>
 
             {/* Content */}
-            <div className="p-6">
-              <div className="flex items-start justify-between mb-3">
-                <div>
-                  <h3 className="text-lg font-bold t-text group-hover:opacity-90 transition-colors leading-tight">
-                    {project.title}
-                  </h3>
-                  <span className="font-mono text-xs t-dim">{project.year}</span>
+            <div className="flex flex-col flex-1 p-5">
+              {/* Year + category dot */}
+              <div className="flex items-center gap-2 mb-2">
+                <span className="w-1.5 h-1.5 rounded-full flex-shrink-0" style={{ backgroundColor: project.color }} />
+                <span className="font-mono text-xs t-dim">{project.year}</span>
+              </div>
+
+              {/* Title */}
+              <h3 className="text-base font-bold t-text leading-snug mb-1.5">{project.title}</h3>
+
+              {/* Description */}
+              <p className="t-muted text-sm leading-relaxed mb-4 line-clamp-3">{project.description}</p>
+
+              {/* Tags — minimal mono line */}
+              <p className="font-mono text-[11px] t-dim mb-4 mt-auto">
+                {project.tags.join('  ·  ')}
+              </p>
+
+              {/* Links — only when real */}
+              {(isReal(project.live) || isReal(project.github)) && (
+                <div className="flex items-center gap-4 pt-3" style={{ borderTop: '1px solid var(--border)' }}>
+                  {isReal(project.live) && (
+                    <a
+                      href={project.live}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold font-mono transition-colors"
+                      style={{ color: project.color }}
+                    >
+                      Live Demo
+                      <span aria-hidden="true">↗</span>
+                    </a>
+                  )}
+                  {isReal(project.github) && (
+                    <a
+                      href={project.github}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-1.5 text-xs font-semibold font-mono t-muted transition-colors hover:t-text"
+                    >
+                      <svg viewBox="0 0 24 24" fill="currentColor" className="w-3.5 h-3.5" aria-hidden="true">
+                        <path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.5v-1.8c-3.2.7-3.9-1.4-3.9-1.4-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.8.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.7 0-1.3.4-2.3 1.2-3.1-.1-.3-.5-1.5.1-3.1 0 0 1-.3 3.3 1.2a11.5 11.5 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.8.1 3.1.8.8 1.2 1.8 1.2 3.1 0 4.4-2.7 5.4-5.3 5.7.4.4.8 1.1.8 2.2v3.3c0 .3.2.6.8.5 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z" />
+                      </svg>
+                      Code
+                    </a>
+                  )}
                 </div>
-                {/* Links for no-image cards */}
-                {!project.image && (
-                  <div className="flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity duration-200">
-                    <a href={project.github} className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold t-muted hover:t-text transition-colors" style={{ border: '1px solid var(--border)' }} title="GitHub">GH</a>
-                    <a href={project.live} className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold transition-colors" style={{ border: `1px solid ${project.color}`, color: project.color }} title="Live Demo">↗</a>
-                  </div>
-                )}
-              </div>
-              <p className="t-muted text-sm leading-relaxed mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {project.tags.map((tag) => (
-                  <span
-                    key={tag}
-                    className="px-3 py-1 rounded-full text-xs font-mono font-semibold"
-                    style={{ backgroundColor: 'var(--bg-card-h)', color: 'var(--text-muted)' }}
-                  >
-                    {tag}
-                  </span>
-                ))}
-              </div>
+              )}
             </div>
           </article>
         ))}

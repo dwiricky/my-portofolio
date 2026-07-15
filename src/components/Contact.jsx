@@ -78,7 +78,7 @@ export default function Contact() {
       {/* Footer */}
       <div className="mt-32 pt-8 flex flex-col md:flex-row items-center justify-between gap-4" style={{ borderTop: '1px solid var(--border)' }}>
         <p className="font-mono text-xs t-dim">
-          © 2026 Ricky Dwi Setyawan — Built with React + Tailwind
+          © 2026 Ricky Dwi Setyawan
         </p>
         <p className="font-mono text-xs t-dim">
           Dibuat dengan <span style={{ color: 'var(--accent)' }}>♥</span> & Semangat

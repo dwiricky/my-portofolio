@@ -1,6 +1,8 @@
 import './index.css';
 import { ThemeProvider } from './ThemeContext';
 import Navbar from './components/Navbar';
+import ConstellationBackground from './components/ConstellationBackground';
+import Reveal from './components/Reveal';
 import Hero from './components/Hero';
 import Experience from './components/Experience';
 import Skills from './components/Skills';
@@ -11,16 +13,18 @@ export default function App() {
   return (
     <ThemeProvider>
       <div className="noise relative min-h-screen overflow-x-hidden t-bg t-text" style={{ transition: 'background-color 0.3s, color 0.3s' }}>
-        {/* Grid Background */}
-        <div className="fixed inset-0 pointer-events-none grid-bg opacity-[0.4]" />
+        {/* Animated constellation / plexus network (behind everything) */}
+        <ConstellationBackground />
+        {/* Faint grid for subtle coding structure */}
+        <div className="fixed inset-0 pointer-events-none grid-bg opacity-[0.18]" style={{ zIndex: 1 }} />
 
         <Navbar />
         <main className="relative z-10">
           <Hero />
-          <Experience />
-          <Skills />
-          <Projects />
-          <Contact />
+          <Reveal variant="left"><Experience /></Reveal>
+          <Reveal variant="right"><Skills /></Reveal>
+          <Reveal variant="scale"><Projects /></Reveal>
+          <Reveal variant="blur"><Contact /></Reveal>
         </main>
 
         {/* Scroll To Top */}
